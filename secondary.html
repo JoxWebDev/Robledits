@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robledits - Homepage</title>
+  <link rel="stylesheet" href="secondary.css">    
+</head>
+<body>
+  <header>
+      <!-- Level Display -->
+  <div id="level-display" class="level-container">
+    <span id="level-star" class="level-star">⭐</span>
+    <span id="level-number">Level: 0</span>
+  </div>
+  
+    <h1>Find Edit Ideas</h1>
+    <input type="text" id="search" placeholder="Search Edit Ideas..."> <button id="searchBtn">🔍</button>
+  </header>
+  
+  <!-- Add Edit Idea Button (Visible when level 10 is reached) -->
+  <div id="add-edit-container">
+    <button id="add-edit-btn">Add Edit Idea</button>
+  </div>
+  <button id="reset-level-btn">Reset Level</button>
+<button id="dark-mode-toggle">🌙 Dark Mode</button>
+<h2></h2>
+  <!-- Form to Add a New Edit Idea -->
+  <div id="add-edit-form">
+    <h3>Add New Edit Idea</h3>
+    <form id="edit-idea-form">
+      <label for="title">Title:</label>
+      <input type="text" id="title" required>
+
+      <label for="description">Description:</label>
+      <textarea id="description" required></textarea>
+
+      <label for="difficulty">Difficulty:</label>
+      <select id="form-difficulty" required>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+
+      <label for="game">Game:</label>
+      <input type="text" id="game" required>
+
+      <label for="emote">Emote:</label>
+      <input type="text" id="emote" required>
+
+      <h3 id="warning">Warning: when putting in a link make sure to change it so it will work! example: <bold>https://youtube.com/shorts/example</bold> to <bold>https://www.youtube.com/embed/example</bold></h3>
+
+      <label for="videoLink">Video Link:</label>
+      <input type="url" id="videoLink" required>
+
+      <label for="videoCreatorCredits">Video Creator Credits:</label>
+      <input type="text" id="videoCreatorCredits" required>
+
+      <button id="submitBtn">Submit</button>
+    </form>
+  </div>
+  
+  <div class="filters">
+    <label for="filter-difficulty">Choose Difficulty Level:</label>
+    <select id="filter-difficulty">
+      <option value="all">All</option>
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+  </div>
+  
+  <!-- Dropdown to select favorites -->
+<select id="favorites-filter">
+  <option value="all">All</option>
+  <option value="favorites">Favorites</option>
+</select>
+
+<!-- Heart icon next to each edit idea will be added dynamically in JS -->
+
+  <section id="edit-ideas">
+    <!-- Edit ideas will be displayed here -->
+  </section>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="secondary.css"></script>
+</body>
+</html>
+
+
+<!-- in the middle of the night
+idk yet
+https://www.youtube.com/embed/BC9bH81aMns?si=2TQyD4KtufXbjq3l 
+
+advanced roblox edit
+Get gone
+https://www.youtube.com/embed/Q_8Gg2jYVss 
+
+shakes edit
+get gone
+https://www.youtube.com/embed/OsDebFRJbZo?si=VpItfEBGKpgZ3ANv
+
+tadow
+stride
+https://www.youtube.com/embed/a6vrl_2ogh8?si=h0SAh9E2KNISELxf
+-->

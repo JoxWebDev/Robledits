@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Robledits Sign Up</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .signup-box {
+      background: #1e1e1e;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 117, 181, 0.4);
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .signup-box h2 {
+      margin-bottom: 25px;
+      color: #ff75b5;
+      text-align: center;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #2d2d2d;
+      color: #fff;
+    }
+
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      background: #ff75b5;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .signup-btn:hover {
+      background: #ff579f;
+    }
+
+    .error {
+      margin-top: 15px;
+      text-align: center;
+      color: #ff4d4d;
+      font-size: 0.9rem;
+    }
+
+    .success {
+      margin-top: 15px;
+      text-align: center;
+      color: #7fff7f;
+      font-size: 0.9rem;
+    }
+
+    a{
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-box">
+    <h2>Sign Up to Robledits</h2>
+    <form id="signupForm">
+      <div class="input-group">
+        <label for="new-username">Username</label>
+        <input type="text" id="new-username" required />
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required />
+      </div>
+      <div class="input-group">
+        <label for="new-password">Password</label>
+        <input type="password" id="new-password" required />
+      </div>
+      <div class="input-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" required />
+      </div>
+      <button type="submit" class="signup-btn">Create Account</button>
+      <p class="error" id="errorMsg"></p>
+      <p class="success" id="successMsg"></p>
+      <button class="signup-btn"><a href="login.html">Log in</a></button>
+    </form>
+  </div>
+
+<script src="shared-users.js"></script>
+<script src="signup.js"></script>
+
+
+</body>
+</html>

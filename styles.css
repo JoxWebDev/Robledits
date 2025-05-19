@@ -1,0 +1,235 @@
+/* Resetting some defaults */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.7), rgba(255, 0, 255, 0.7), rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.4));
+    background-size: 400% 400%;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    animation: magicalGradient 15s ease infinite;
+    transition: background-color 0.3s;
+    flex-direction: column;
+}
+
+/* Animation for the magical gradient */
+@keyframes magicalGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Container styling */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 1px 2px 20px 1px rgb(255, 255, 255);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Header and Navigation */
+header {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+nav ul {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #4c9efc;
+}
+
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.3s;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px;
+    margin-top: 80px;
+    width: 100%;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #4c9efc;
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: #3b7bde;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #222;
+    color: #ccc;
+}
+
+body.dark-mode .container {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    box-shadow: 1px 2px 20px 10px rgba(60, 31, 81, 0.5);
+}
+
+body.dark-mode .btn {
+    background-color: #6a86f1;
+}
+
+body.dark-mode .btn:hover {
+    background-color: #5562da;
+}
+
+body.dark-mode .nav-link {
+    color: #ccc;
+}
+
+body.dark-mode .nav-link:hover {
+    color: #4c9efc;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .hero {
+        padding: 30px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* About Section */
+#about {
+    padding: 50px;
+}
+
+#about h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Contact Section */
+#contact {
+    padding: 50px;
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact input, #contact button {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#contact button {
+    background-color: #4c9efc;
+    color: white;
+    cursor: pointer;
+}
+
+#contact button:hover {
+    background-color: #3b7bde;
+}
+
+/* Image styling */
+img {
+    width: 10px;
+    max-width: 500px;
+    height: auto;
+    margin-top: 20px;
+}
+
+section{
+    width: 800px;
+}
