@@ -85,7 +85,473 @@
 
 
 
+  <script>
+const addEditIdea = document.getElementById('add-edit-btn');
+const addEditContainer = document.getElementById('add-edit-container');
+const addEditForm = document.getElementById('add-edit-form');
+const editIdeaForm = document.getElementById('edit-idea-form');
+// Select elements
+const searchBtn = document.getElementById('searchBtn');
+const resetLevelBtn = document.getElementById('reset-level-btn');
+const editIdeas = [
+  { 
+    name: "Tadow", 
+    difficulty: "easy", 
+    description: "Just needs a smooth transition to be good.", 
+    game: "ttd3",
+    emote: "stride",
+    videoLink: "https://www.youtube.com/embed/a6vrl_2ogh8?si=n1SZzkWJmFy8ZL0s",
+    videoCreatorCredits: "Joxlyaz",
+    owner: true
+  },
+  { 
+    name: "Faded", 
+    difficulty: "medium", 
+    description: "Needs some skills but isn't very complicated.", 
+    game: "ttd3",
+    emote: "gentleman's dab",
+    videoLink: "https://www.youtube.com/embed/WE2cxC9U2wE?si=1UjDBLWmHEEXDkJ4",
+    videoCreatorCredits: "Joxlyaz",
+    owner: true
+  },
+  { 
+    name: "In the middle of the night", 
+    difficulty: "medium", 
+    description: "doesn't take much skills.",
+    game: "ttd3",
+    emote: "star power",
+    videoLink: "https://www.youtube.com/embed/BC9bH81aMns?si=bOC9yhCVigxbb-er",
+    videoCreatorCredits: "Joxlyaz",
+    owner: true
+  },
+  { 
+    name: "I would take a bullet for you... 💔", 
+    difficulty: "medium", 
+    description: "Needs just some knowledge and keyframes.", 
+    game: "roblox avatar editor",
+    emote: "zombie (emote), point",
+    videoLink: "https://www.youtube.com/embed/VcAKuyck6Qk?si=RJAvs3yPJAbodqmx",
+    videoCreatorCredits: "Joxlyaz",
+    owner: true
+  },
+  { 
+    name: "Haven't I given enough", 
+    difficulty: "hard", 
+    description: "needs some complicated things (made in capcut)",
+    game: "roblox avatar editor",
+    emote: "zombie (emote)",
+    videoLink: "https://www.youtube.com/embed/Fo8wYCkifcQ?si=djJh1Skv4ZgicVpP",
+    videoCreatorCredits: "Joxlyaz",
+    owner: true
+  },
+  { 
+    name: "No one came to save me 😭", 
+    difficulty: "easy", 
+    description: "Very easy, the only hard part is to get to the top of the tower without falling.", 
+    game: "Fall but 100 players",
+    emote: "none",
+    videoLink: "https://www.youtube.com/embed/1IvbsKgjkyc?si=Cc-L9L7WG-YhCyeT",
+    videoCreatorCredits: "Gh0st4Cryztak",
+    owner: true
+  },
+  { 
+    name: "_______ wins 🤩", 
+    difficulty: "hard", 
+    description: "needs multiple accounts and is definetly not for beginers.", 
+    game: "ttd3",
+    emote: "San Tan",
+    videoLink: "https://www.youtube.com/embed/D5ULtGcSBJc?si=I97Ync9okhdIp8yQ",
+    videoCreatorCredits: "Gh0st4Cryztak",
+    owner: true
+  }
+];
+
+function formatYouTubeLink() {
+  const videoLinkInput = document.getElementById('videoLink');
+  const videoLink = videoLinkInput.value;
+
+  // Updated regex to capture video ID from various YouTube URLs
+  const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([\w\-]{11})/;
+
+  if (youtubeRegex.test(videoLink)) {
+    const videoId = videoLink.match(youtubeRegex)[1];
+    const formattedLink = `https://www.youtube.com/embed/${videoId}`;
+    videoLinkInput.value = formattedLink;
+  }
+}
+
+
+const editIdeasContainer = document.getElementById('edit-ideas');
+const difficultyFilter = document.getElementById('filter-difficulty');
+const searchInput = document.getElementById('search');
+
+// Initialize user data from localStorage
+let searchCount = parseInt(localStorage.getItem("searchCount")) || 0;
+let userLevel = parseInt(localStorage.getItem("userLevel")) || 0;
+
+// Function to calculate the level based on the search count
+function calculateLevel(searchCount) {
+  let level = 0;
+  let requiredSearches = 2;
+  while (searchCount >= requiredSearches) {
+    searchCount -= requiredSearches;
+    requiredSearches *= 1.5; // Increase requirement for next level
+    level++;
+  }
+  return level;
+}
+
+// Function to update the level display
+function updateLevelDisplay() {
+  const previousLevel = userLevel;
+  userLevel = calculateLevel(searchCount); // Update level based on search count
+  document.getElementById('level-number').textContent = `Level: ${userLevel}`;
+
+  // Trigger animation only if the level increased
+  if (userLevel > previousLevel) {
+    playLevelUpAnimation();
+  }
+
+  // Show the Add Edit Idea Button when level 10 or above is reached
+  const addEditContainer = document.getElementById('add-edit-container');
+  if (userLevel >= 10) {
+    addEditContainer.style.display = 'block'; // Show the container
+  } else {
+    addEditContainer.style.display = 'none'; // Hide it if level is less than 10
+  }
+}
+
+// Function to play the level-up animation
+function playLevelUpAnimation() {
+  const levelStar = document.getElementById('level-star');
+  const levelStarContainer = document.createElement('div');
+
+  // Initial styles for the main star
+  levelStar.style.fontSize = '2rem';
+  levelStar.style.transition = 'transform 0.5s, opacity 0.5s';
+
+  // Check if the user reached level 10
+  if (userLevel === 10) {
+    // Fireworks confetti for level 10
+    var duration = 5 * 1000;
+var animationEnd = Date.now() + duration;
+var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+var interval = setInterval(function() {
+  var timeLeft = animationEnd - Date.now();
+
+  if (timeLeft <= 0) {
+    return clearInterval(interval);
+  }
+
+  var particleCount = 50 * (timeLeft / duration);
+  // since particles fall down, start a bit higher than random
+  confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+  confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+}, 250);
+  } else {
+    // Regular realistic confetti for other level-ups
+    var count = 200;
+var defaults = {
+  origin: { y: 0.7 }
+};
+
+function fire(particleRatio, opts) {
+  confetti({
+    ...defaults,
+    ...opts,
+    particleCount: Math.floor(count * particleRatio)
+  });
+}
+
+fire(0.25, {
+  spread: 26,
+  startVelocity: 55,
+});
+fire(0.2, {
+  spread: 60,
+});
+fire(0.35, {
+  spread: 100,
+  decay: 0.91,
+  scalar: 0.8
+});
+fire(0.1, {
+  spread: 120,
+  startVelocity: 25,
+  decay: 0.92,
+  scalar: 1.2
+});
+fire(0.1, {
+  spread: 120,
+  startVelocity: 45,
+});
+  }
+
+  // Reset the star and mini stars after animation
+  setTimeout(() => {
+    levelStar.style.animation = 'none'
+    levelStar.style.opacity = '1'; // Make sure star is visible again
+    levelStar.style.transform = 'scale(1)'; // Reset scale
+  }, 1500); // Duration of the animation
+}
+
+// Simulate searches (for testing purposes)
+function simulateSearch() {
+  searchCount++;
+  localStorage.setItem("searchCount", searchCount);
+  updateLevelDisplay();
+}
+
+// Initialize the display
+updateLevelDisplay();
+
+// Example: Hook simulateSearch to a button (for testing)
+document.querySelector('#simulate-search-btn')?.addEventListener('click', simulateSearch);
+
+
+// Get reference to the favorites filter dropdown
+const favoritesFilter = document.getElementById('favorites-filter');
+
+// Initialize the favorites array from localStorage (or empty array if not set)
+let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+// Function to toggle favorite status of an edit idea
+function toggleFavorite(ideaName) {
+  if (favorites.includes(ideaName)) {
+    // Remove from favorites if already in the list
+    favorites = favorites.filter(fav => fav !== ideaName);
+  } else {
+    // Add to favorites if not in the list
+    favorites.push(ideaName);
+  }
+
+  // Save the updated favorites to localStorage
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+
+  // Re-render the ideas to reflect the favorite status
+  filterIdeas();
+}
+
+function deleted(ideaName) {
+  let storedIdeas = JSON.parse(localStorage.getItem('nonOwnerIdeas')) || [];
+  storedIdeas = storedIdeas.filter(idea => idea.name !== ideaName);
+  localStorage.setItem('nonOwnerIdeas', JSON.stringify(storedIdeas));
   
+  // Redisplay everything (preset + updated non-owner list)
+  const allIdeas = [...editIdeas, ...storedIdeas];
+  displayEditIdeas(allIdeas);
+}
+
+
+
+
+// Function to display the heart icon based on whether the idea is in favorites
+function getHeartIcon(ideaName) {
+  return favorites.includes(ideaName) 
+    ? '<span class="heart" style="color: red;">🩷</span>' 
+    : '<span class="heart">🤍</span>';
+}
+
+// Function to display the edit ideas
+function displayEditIdeas(ideas) {
+  editIdeasContainer.innerHTML = '';
+  ideas.forEach(idea => {
+    const card = document.createElement('div');
+    card.classList.add('idea-card', 'animated-border');
+
+    let html = `
+      <h3 id="different">${idea.name}</h3>
+      <p id="different">${idea.description}</p>
+      <p id="different"><b>Game:</b> "${idea.game}"</p>
+      <p id="different"><b>Emote:</b> "${idea.emote}"</p>
+      <span id="different">Difficulty: ${idea.difficulty}</span>
+      <div class="video-container">
+        <iframe src="${idea.videoLink}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <h3 id="different"> Video creator credits: <em>${idea.videoCreatorCredits}</em> </h3>
+      <div class="favorite-container" onclick="toggleFavorite('${idea.name}')">
+        ${getHeartIcon(idea.name)} <!-- Heart icon -->
+      </div>
+    `;
+
+    if (!idea.owner) {
+      html += `<button id="delete" onclick="deleted('${idea.name}')">Delete</button>`;
+    }
+
+    card.innerHTML = html;
+    editIdeasContainer.appendChild(card);
+
+    // Save non-owner ideas to localStorage if they aren't already there
+    if (!idea.owner) {
+      const savedIdeas = JSON.parse(localStorage.getItem('nonOwnerIdeas')) || [];
+      if (!savedIdeas.find(i => i.name === idea.name)) {
+        savedIdeas.push(idea);
+        localStorage.setItem('nonOwnerIdeas', JSON.stringify(savedIdeas));
+      }
+    }
+  });
+}
+
+
+
+function filterIdeas() {
+  const difficulty = difficultyFilter.value;
+  const searchQuery = searchInput.value.toLowerCase();
+  const showFavorites = favoritesFilter.value === "favorites";
+
+  // Combine preset ideas and saved ones
+  const storedIdeas = JSON.parse(localStorage.getItem('nonOwnerIdeas')) || [];
+  const allIdeas = [...editIdeas, ...storedIdeas];
+
+  let filteredIdeas = allIdeas.filter(idea => 
+    (difficulty === "all" || idea.difficulty === difficulty) &&
+    (idea.name.toLowerCase().includes(searchQuery) || idea.description.toLowerCase().includes(searchQuery))
+  );
+
+  // If "favorites" is selected, only show favorited ideas
+  if (showFavorites) {
+    filteredIdeas = filteredIdeas.filter(idea => favorites.includes(idea.name));
+  }
+
+  displayEditIdeas(filteredIdeas);
+}
+
+
+// Event listener for the favorites filter dropdown
+favoritesFilter.addEventListener('change', filterIdeas);
+
+// Event listeners for filtering and searching
+difficultyFilter.addEventListener('change', filterIdeas);
+searchInput.addEventListener('input', () => {
+  // Increment search count on each search
+  searchCount++;
+  localStorage.setItem("searchCount", searchCount); // Save to localStorage
+  updateLevelDisplay(); // Update level display based on new search count
+  filterIdeas();
+});
+
+// Event listener for the reset level button
+resetLevelBtn.addEventListener('click', () => {
+  // Reset search count and user level
+  localStorage.removeItem("searchCount");
+  localStorage.removeItem("userLevel");
+
+  // Reset the values in the script
+  searchCount = 0;
+  userLevel = 0;
+
+  // Update the level display
+  updateLevelDisplay();
+  
+  // Optionally, display all edit ideas again
+  filterIdeas();
+});
+
+// Initial display of all ideas
+displayEditIdeas(editIdeas);
+updateLevelDisplay(); // Update the level display on initial load
+
+// Dark mode toggle functionality
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+// Load the dark mode preference from localStorage
+const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+
+if (isDarkMode) {
+   document.querySelectorAll('.idea-card').forEach(card => card.classList.add('dark-mode'));
+  document.body.classList.add('dark-mode');
+  document.querySelector('header').classList.add('dark-mode');
+  document.querySelector('#level-display').classList.add('dark-mode');
+  document.querySelectorAll('.idea-card').forEach(card => card.classList.add('dark-mode'));
+  document.querySelectorAll('button').forEach(btn => btn.classList.add('dark-mode'));
+  document.querySelectorAll('#add-edit-form').forEach(form => form.classList.add('dark-mode'));
+  document.querySelectorAll('input, select, textarea').forEach(input => input.classList.add('dark-mode'));
+  document.querySelectorAll('#level-star, #level-number').forEach(level => level.classList.add('dark-mode'));
+  darkModeToggle.textContent = '🌞 Light Mode';
+} else {
+  darkModeToggle.textContent = '🌙 Dark Mode';
+}
+
+// Toggle dark mode on button click
+darkModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  document.querySelector('header').classList.toggle('dark-mode');
+  document.querySelector('#level-display').classList.toggle('dark-mode');
+  document.querySelectorAll('.idea-card').forEach(card => card.classList.toggle('dark-mode'));
+  document.querySelectorAll('button').forEach(btn => btn.classList.toggle('dark-mode'));
+  document.querySelectorAll('#add-edit-form').forEach(form => form.classList.toggle('dark-mode'));
+  document.querySelectorAll('input, select, textarea').forEach(input => input.classList.toggle('dark-mode'));
+  document.querySelectorAll('#different').forEach(text => text.classList.toggle('dark-mode'));
+document.querySelectorAll('#level-star, #level-number').forEach(level => level.classList.toggle('dark-mode'));
+  // Save the user preference in localStorage
+  if (document.body.classList.contains('dark-mode')) {
+    localStorage.setItem('darkMode', 'enabled');
+    darkModeToggle.textContent = '🌞 Light Mode';
+  } else {
+    localStorage.setItem('darkMode', 'disabled');
+    darkModeToggle.textContent = '🌙 Dark Mode';
+  }
+});
+
+// Get the necessary elements
+const addEditBtn = document.getElementById('add-edit-btn');
+// Add event listener to the "Add Edit Idea" button
+addEditBtn.addEventListener('click', function() {
+  // Toggle the visibility of the form
+  if (addEditForm.style.display === 'none' || addEditForm.style.display === '') {
+    addEditForm.style.display = 'block'; // Show the form
+  } else {
+    addEditForm.style.display = 'none'; // Hide the form if it's already visible
+  }
+});
+// Add/Edit Idea Button functionality
+
+const submitBtn = document.getElementById('submitBtn');
+addEditContainer.addEventListener('click', () => {
+  addEditForm.style.display = 'block';
+});
+
+submitBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const newIdea = {
+    name: document.getElementById('title').value,
+    description: document.getElementById('description').value,
+    difficulty: document.getElementById('form-difficulty').value,
+    game: document.getElementById('game').value,
+    emote: document.getElementById('emote').value,
+    videoLink: document.getElementById('videoLink').value,
+    videoCreatorCredits: document.getElementById('videoCreatorCredits').value
+  };
+
+
+  editIdeas.push(newIdea);
+  localStorage.setItem('editIdeas', JSON.stringify(editIdeas));
+  addEditForm.style.display = 'none';
+  filterIdeas();
+});
+
+console.log(addEditBtn);
+console.log(addEditForm);
+
+
+
+/*
+
+*/
+
+// Load non-owner ideas from localStorage
+const storedIdeas = JSON.parse(localStorage.getItem('nonOwnerIdeas')) || [];
+
+// Combine both arrays
+const allIdeas = [...editIdeas, ...storedIdeas];
+
+// Display all ideas (preset + saved non-owner ones)
+displayEditIdeas(allIdeas);</script>
   <script src="secondary.css"></script>
 </body>
 </html>
