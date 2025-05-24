@@ -85,8 +85,11 @@
 
 
 
-  <script>
-const addEditIdea = document.getElementById('add-edit-btn');
+
+ <script>
+  window.addEventListener("DOMContentLoaded", function () {
+    console.log("JS started!");
+    const addEditIdea = document.getElementById('add-edit-btn');
 const addEditContainer = document.getElementById('add-edit-container');
 const addEditForm = document.getElementById('add-edit-form');
 const editIdeaForm = document.getElementById('edit-idea-form');
@@ -551,7 +554,10 @@ const storedIdeas = JSON.parse(localStorage.getItem('nonOwnerIdeas')) || [];
 const allIdeas = [...editIdeas, ...storedIdeas];
 
 // Display all ideas (preset + saved non-owner ones)
-displayEditIdeas(allIdeas);</script>
+displayEditIdeas(allIdeas);
+  });
+</script>
+
 </body>
 </html>
 
